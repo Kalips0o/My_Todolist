@@ -2,11 +2,11 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {IconButton, TextField} from "@material-ui/core";
 import {ControlPoint} from "@material-ui/icons";
 
-type addItemFormPropsType = {
+export type AddItemFormPropsType = {
     addItem: (title: string) => void
 };
 
-export const  AddItemForm =React.memo((props: addItemFormPropsType) =>{
+export const  AddItemForm =React.memo((props: AddItemFormPropsType) =>{
 
     let [title, setTitle] = useState("");
     let [error, setError] = useState<string | null>(null)
