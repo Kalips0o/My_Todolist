@@ -1,4 +1,4 @@
-import {Task, TaskPropsType} from "./Task";
+import {Task, TaskPropsType} from "../todolists/task/Task";
 import {Meta, Story} from "@storybook/react";
 import {action} from "@storybook/addon-actions";
 
@@ -21,9 +21,11 @@ const baseArgs={
     removeTask:removeTaskCallback
 }
 export const TaskIsDoneExample = Template.bind({})
+
 TaskIsDoneExample.args = {
 
     ...baseArgs,
+    // @ts-ignore
     task: {id: '1', title: 'JS', isDone: true},
     todolistId: 'todolistId1'
 }
@@ -33,6 +35,7 @@ export const TaskIsNotDoneExample = Template.bind({})
 TaskIsNotDoneExample.args = {
 
     ...baseArgs,
+    // @ts-ignore
     task: {id: '1', title: 'JS', isDone: false},
     todolistId: 'todolistId1'
 }
