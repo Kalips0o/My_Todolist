@@ -63,7 +63,7 @@ export const Login = () => {
     }
 
     return (
-        <div className={styles.container} >
+        <section className={styles.container} >
                 <AnimatedMonster formData={formik.values} />
                     <FormControl className={styles.form} >
                         <FormLabel style={{ color: 'inherit' }}>
@@ -104,7 +104,7 @@ export const Login = () => {
                             </FormGroup>
                         </form>
                     </FormControl>
-        </div>
+        </section>
 
 );
 };
