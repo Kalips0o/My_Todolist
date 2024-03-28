@@ -71,7 +71,7 @@ function App({ demo = false }: AppPropsType) {
     }
 
     return (
-        <div>
+        <>
             <ErrorSnackbars />
             <ThemeProvider theme={theme}>
                 <CssBaseline />
@@ -99,7 +99,7 @@ function App({ demo = false }: AppPropsType) {
                 )}
                 <Container className="main-container">
                     <Routes>
-                        <Route path={'/'} element={<TodolistsList demo={demo} />} />
+                        <Route path={'/Todolist'} element={<TodolistsList demo={demo} />} />
                         <Route path={'/todolist-ts'} element={<TodolistsList demo={demo} />} />
                         <Route path={'/login'} element={<Login />} />
                         <Route path={'/404'} element={<h1 className="not-found">404: PAGE NOT FOUND</h1>} />
@@ -107,7 +107,7 @@ function App({ demo = false }: AppPropsType) {
                     </Routes>
                 </Container>
             </ThemeProvider>
-        </div>
+        </>
     );
 }
 
