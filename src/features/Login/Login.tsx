@@ -5,11 +5,11 @@ import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useFormik } from 'formik';
-import { Navigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
-import { selectIsLoggedIn } from './authSelectors';
-import { authActions } from './index';
+import {useFormik} from 'formik';
+import {Navigate} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
+import {selectIsLoggedIn} from './authSelectors';
+import {authActions} from './index';
 import {Grid} from "@mui/material";
 import {AnimatedMonster} from "./AnimatedMonster";
 
@@ -22,7 +22,7 @@ type FormikErrorType = {
 export const Login = () => {
     const dispatch = useAppDispatch();
     const isLoggedIn = useAppSelector(selectIsLoggedIn);
-    const { login } = authActions;
+    const {login} = authActions;
 
     const formik = useFormik({
         initialValues: {
@@ -49,8 +49,10 @@ export const Login = () => {
             const action = await dispatch(login(values));
             if (login.rejected.match(action)) {
                 if (action.payload?.fieldsErrors?.length) {
-                    const error = action.payload?.fieldsErrors[0];
-                    formikHelpers.setFieldError(error.field, error.error);
+                    const error = action.payload.fieldsErrors[0];
+                    if (error) {
+                        formikHelpers.setFieldError(error.field, error.error);
+                    }
                 } else {
                     // Handle other errors if needed
                 }
@@ -59,11 +61,11 @@ export const Login = () => {
     });
 
     if (isLoggedIn) {
-        return <Navigate to={'/todolist-ts'} />;
+        return <Navigate to={'/todolist-ts'}/>;
     }
 
     return (
-        <Grid container display='flex' justifyContent="center"   alignItems="center" position='relative' >
+        <Grid container display='flex' justifyContent="center" alignItems="center" position='relative'>
             <Grid item xs={4}>
                 <AnimatedMonster formData={formik.values}/>
                 <form onSubmit={formik.handleSubmit}>
@@ -72,15 +74,15 @@ export const Login = () => {
                         width: '400px',
                         border: '5px solid purple',
                         borderRadius: '10px',
-                        backgroundColor:' #fff',
+                        backgroundColor: ' #fff',
                         padding: '30px 60px',
                         top: '230px',
                         left: '50%',
                         transform: 'translate(-50%)',
-                        zIndex:' 1',
+                        zIndex: ' 1',
 
                     }}>
-                        <FormLabel style={{ color: 'inherit' }}>
+                        <FormLabel style={{color: 'inherit'}}>
                             <p>
                                 To log in get registered{" "}
                                 <a href={"https://social-network.samuraijs.com/"} target={"_blank"} rel="noreferrer">
@@ -93,14 +95,17 @@ export const Login = () => {
                         </FormLabel>
                         <FormGroup>
                             <TextField label="Email" margin="normal" {...formik.getFieldProps("email")} />
-                            {formik.touched.email && formik.errors.email && <div style={{ color: 'red' }}>{formik.errors.email}</div>}
-                            <TextField type="password" label="Password" margin="normal" {...formik.getFieldProps("password")} />
+                            {formik.touched.email && formik.errors.email &&
+                            <div style={{color: 'red'}}>{formik.errors.email}</div>}
+                            <TextField type="password" label="Password"
+                                       margin="normal" {...formik.getFieldProps("password")} />
                             {formik.touched.password && formik.errors.password && (
-                                <div style={{ color: 'red' }}>{formik.errors.password}</div>
+                                <div style={{color: 'red'}}>{formik.errors.password}</div>
                             )}
                             <FormControlLabel
                                 label={"Remember me"}
-                                control={<Checkbox {...formik.getFieldProps("rememberMe")} checked={formik.values.rememberMe} />}
+                                control={<Checkbox {...formik.getFieldProps("rememberMe")}
+                                                   checked={formik.values.rememberMe}/>}
                             />
                             <Button
                                 type={"submit"}
