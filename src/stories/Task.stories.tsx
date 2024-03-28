@@ -1,41 +1,63 @@
-import {Task, TaskPropsType} from "../todolists/task/Task";
-import {Meta, Story} from "@storybook/react";
-import {action} from "@storybook/addon-actions";
+import React from 'react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {ReduxStoreProviderDecorator} from './decorators/ReduxStoreProviderDecorator';
+import {useSelector} from 'react-redux';
+import {TaskPriorities, TaskStatuses} from '../api/todolists-api';
+import {TaskDomainType} from '../features/TodolistsList/Todolist/Task/tasks-reducer';
+import {RootStateType} from '../features/Application/AppTypes';
+import {Task} from '../features/TodolistsList/Todolist/Task/Task';
 
 
+// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-    title: 'Task',
+    title: 'Todolists/Task',
     component: Task,
-    } as Meta
+    // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+    decorators: [ReduxStoreProviderDecorator]
+} as ComponentMeta<typeof Task>;
 
-const changeTaskStatusCallback=action('Status changed inside Task ')
-const changeTaskTitleCallback=action('Title changed inside Task ')
-const removeTaskCallback=action('Remove Button  inside Task clicked ')
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof Task> = (args) => <Task {...args}/>;
 
-
-const Template: Story<TaskPropsType> = (args) => <Task {...args}/>
-
-const baseArgs={
-    changeTaskStatus:changeTaskStatusCallback,
-    changeTaskTitle:changeTaskTitleCallback,
-    removeTask:removeTaskCallback
+export const TaskIsDoneStory = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+TaskIsDoneStory.args = {
+    task: {
+        id: '1', title: 'JS', description: '',
+        todoListId: 'todolistID_1',
+        status: TaskStatuses.Completed,
+        order: 0,
+        priority: TaskPriorities.Low,
+        startDate: '',
+        deadline: '',
+        addedDate: '',
+        entityStatus: 'idle'
+    },
+    todolistId: 'todolistID_1'
 }
-export const TaskIsDoneExample = Template.bind({})
 
-TaskIsDoneExample.args = {
-
-    ...baseArgs,
-    // @ts-ignore
-    task: {id: '1', title: 'JS', isDone: true},
-    todolistId: 'todolistId1'
+export const TaskIsNotDoneStory = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+TaskIsNotDoneStory.args = {
+    task: {
+        id: '2', title: 'Honey', description: '',
+        todoListId: 'todolistID_2',
+        status: TaskStatuses.New,
+        order: 0,
+        priority: TaskPriorities.Low,
+        startDate: '',
+        deadline: '',
+        addedDate: '',
+        entityStatus: 'idle'
+    },
+    todolistId: 'todolistID_2'
 }
 
-
-export const TaskIsNotDoneExample = Template.bind({})
-TaskIsNotDoneExample.args = {
-
-    ...baseArgs,
-    // @ts-ignore
-    task: {id: '1', title: 'JS', isDone: false},
-    todolistId: 'todolistId1'
+const TaskWithRedux = () => {
+    const task = useSelector<RootStateType, TaskDomainType>(state => state.tasks['todolistID_1'][0])
+    return <Task task={task} todolistId={'todolistID_1'} disabled={false}/>
 }
+const Template1: ComponentStory<typeof TaskWithRedux> = () => {
+    return <TaskWithRedux/>
+};
+export const TaskWithReduxStory = Template1.bind({});

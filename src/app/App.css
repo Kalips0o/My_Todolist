@@ -1,0 +1,30 @@
+.loading-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+}
+
+.appbar-toolbar {
+  justify-content: space-between;
+}
+
+.linear-progress {
+  top: 60px;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.not-found {
+  text-align: center;
+}
