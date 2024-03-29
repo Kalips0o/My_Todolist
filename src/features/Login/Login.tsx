@@ -5,13 +5,13 @@ import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {useFormik} from 'formik';
-import {Navigate} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from '../../common/hooks/hooks';
-import {selectIsLoggedIn} from './authSelectors';
-import {authActions} from './index';
-import {Grid} from "@mui/material";
-import {AnimatedMonster} from "./AnimatedMonster";
+import { useFormik } from 'formik';
+import { Navigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../common/hooks/hooks';
+import { selectIsLoggedIn } from './authSelectors';
+import { authActions } from './index';
+import { Grid } from "@mui/material";
+import { AnimatedMonster } from "./AnimatedMonster";
 
 type FormikErrorType = {
     email?: string;
@@ -22,7 +22,7 @@ type FormikErrorType = {
 export const Login = () => {
     const dispatch = useAppDispatch();
     const isLoggedIn = useAppSelector(selectIsLoggedIn);
-    const {login} = authActions;
+    const { login } = authActions;
 
     const formik = useFormik({
         initialValues: {
@@ -61,15 +61,17 @@ export const Login = () => {
     });
 
     if (isLoggedIn) {
-        return <Navigate to={'/todolist-ts'}/>;
+        return <Navigate to={'/todolist-ts'} />;
     }
 
     return (
-        <Grid container display='flex' justifyContent="center" alignItems="center" position='relative'>
+        <Grid position='relative'>
             <Grid item xs={4}>
-                <AnimatedMonster formData={formik.values}/>
+                <AnimatedMonster formData={formik.values} />
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl style={{
+                        display: 'flex',
+                        justifyContent: 'center',
                         position: 'absolute',
                         width: '400px',
                         border: '5px solid purple',
@@ -82,7 +84,7 @@ export const Login = () => {
                         zIndex: ' 1',
 
                     }}>
-                        <FormLabel style={{color: 'inherit'}}>
+                        <FormLabel style={{ color: 'inherit', fontFamily: 'Droid Sans, cursive' }}>
                             <p>
                                 To log in get registered{" "}
                                 <a href={"https://social-network.samuraijs.com/"} target={"_blank"} rel="noreferrer">
@@ -94,24 +96,25 @@ export const Login = () => {
                             <p>Password: free</p>
                         </FormLabel>
                         <FormGroup>
-                            <TextField label="Email" margin="normal" {...formik.getFieldProps("email")} />
+                            <TextField label="Email" margin="normal" {...formik.getFieldProps("email")} style={{ fontFamily: 'Droid Sans, cursive' }} />
                             {formik.touched.email && formik.errors.email &&
-                            <div style={{color: 'red'}}>{formik.errors.email}</div>}
+                            <div style={{ color: 'red', fontFamily: 'Droid Sans, cursive' }}>{formik.errors.email}</div>}
                             <TextField type="password" label="Password"
-                                       margin="normal" {...formik.getFieldProps("password")} />
+                                       margin="normal" {...formik.getFieldProps("password")} style={{ fontFamily: 'Droid Sans, cursive' }} />
                             {formik.touched.password && formik.errors.password && (
-                                <div style={{color: 'red'}}>{formik.errors.password}</div>
+                                <div style={{ color: 'red', fontFamily: 'Droid Sans, cursive' }}>{formik.errors.password}</div>
                             )}
                             <FormControlLabel
                                 label={"Remember me"}
                                 control={<Checkbox {...formik.getFieldProps("rememberMe")}
-                                                   checked={formik.values.rememberMe}/>}
+                                                   checked={formik.values.rememberMe} />}
                             />
                             <Button
                                 type={"submit"}
                                 variant={"contained"}
                                 disabled={!(formik.isValid && formik.dirty)}
                                 color={"primary"}
+                                style={{ fontFamily: 'Droid Sans, cursive' }}
                             >
                                 Login
                             </Button>

@@ -67,13 +67,15 @@ export const Todolist: FC<TodolistPropsType> = memo(({todolist, demo = false}) =
      }, [dispatch, todolist.id, demo])*/
 
     const renderFilterButton = (title: string, buttonFilter: FilterType) => {
-        return <Button size={'small'} variant={'contained'}
+        return <Button style={{
+            fontFamily: 'Droid Sans, cursive'
+        }} size={'small'} variant={'contained'}
                        color={todolist.filter === buttonFilter ? 'secondary' : 'primary'}
                        onClick={() => filterTasksHandler(buttonFilter)}>{title}</Button>
     }
 
     return (
-        <Paper elevation={3} style={{padding: '20px', margin: '5px', position: 'relative', width: '300px'}}>
+        <Paper elevation={3} style={{padding: '20px', margin: '5px', position: 'relative', width: '300px',}}>
             <h3 style={{wordWrap: 'break-word'}}>
                 <EditableSpan value={todolist.title} onChange={editTodolistTitleHandler} disabled={isDisabled}/>
                 <IconButton onClick={removeTodolistHandler} color={'secondary'} disabled={isDisabled}
