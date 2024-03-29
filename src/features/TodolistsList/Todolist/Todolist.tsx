@@ -59,16 +59,10 @@ export const Todolist: FC<TodolistPropsType> = memo(({todolist, demo = false}) =
                                   disabled={isDisabled}/>)
         : <div style={{padding: '10px', color: '#9c9c9c'}}>No tasks in this list</div>
 
-    /* useEffect(() => {
-         if (demo) {
-             return;
-         }
-         dispatch(fetchTasksTC(todolist.id))
-     }, [dispatch, todolist.id, demo])*/
-
     const renderFilterButton = (title: string, buttonFilter: FilterType) => {
         return <Button style={{
-            fontFamily: 'Droid Sans, cursive'
+            fontFamily: 'Roboto, monospace',
+
         }} size={'small'} variant={'contained'}
                        color={todolist.filter === buttonFilter ? 'secondary' : 'primary'}
                        onClick={() => filterTasksHandler(buttonFilter)}>{title}</Button>
@@ -87,7 +81,12 @@ export const Todolist: FC<TodolistPropsType> = memo(({todolist, demo = false}) =
             <List>
                 {tasksToRender}
             </List>
-            <div>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '7px',
+
+            }}>
                 {renderFilterButton('All', 'all')}
                 {renderFilterButton('Active', 'active')}
                 {renderFilterButton('Completed', 'completed')}

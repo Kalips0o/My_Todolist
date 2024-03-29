@@ -4,7 +4,6 @@ import {useActions, useAppSelector} from '../common/hooks/hooks';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
-import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -84,14 +83,14 @@ function App({demo = false}: AppPropsType) {
                                 </IconButton>
                             </IconButton>
                             <Typography variant="h6" style={{
-                                fontFamily: 'Droid Sans, cursive'
+                                fontFamily: 'Roboto, monospace'
                             }}>
                                 Todolists
                             </Typography>
                             <div>
                                 {isLoggedIn && (
                                     <Button style={{
-                                        fontFamily: 'Droid Sans, cursive'
+                                        fontFamily: 'Roboto, monospace'
                                     }} color="inherit" variant={'outlined'} onClick={logoutHandler}>Log out</Button>
                                 )}
                             </div>
